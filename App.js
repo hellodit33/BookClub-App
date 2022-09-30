@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import {
   StyleSheet,
@@ -23,8 +25,48 @@ import YearsScreen from "./screens/YearsScreen";
 import BooksOverviewScreen from "./screens/BooksOverviewScreen";
 import DefaultScreen from "./screens/DefaultScreen";
 import BookDetailsScreen from "./screens/BookDetailsScreen";
+import ToReadScreen from "./screens/ToReadScreen";
+import { Ionicons } from "@expo/vector-icons";
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
+const BottomTab = createBottomTabNavigator();
 
+function DrawerNavigator() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: "purple" },
+        headerTintColor: "grey",
+        sceneContainerStyle: { backgroundColor: "white" },
+        drawerContentStyle: { backgroundColor: "white" },
+        drawerInactiveTintColor: "purple",
+        drawerActiveTintColor: "black",
+        drawerActiveBackgroundColor: "purple",
+      }}
+    >
+      <Drawer.Screen
+        name="Years"
+        component={YearsScreen}
+        options={{
+          title: "Åren",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="calendar" color={color} size={size}></Ionicons>
+          ),
+        }}
+      ></Drawer.Screen>
+      <Drawer.Screen
+        name="ToRead"
+        component={ToReadScreen}
+        options={{
+          title: "Böcker att läsa",
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="book" color={color} size={size}></Ionicons>
+          ),
+        }}
+      ></Drawer.Screen>
+    </Drawer.Navigator>
+  );
+}
 export default function App() {
   return (
     <>
@@ -45,10 +87,10 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name="Years"
-            component={YearsScreen}
+            name="Drawer"
+            component={DrawerNavigator}
             options={{
-              title: "Åren",
+              headerShown: false,
             }}
           />
           <Stack.Screen name="BooksOverview" component={BooksOverviewScreen} />

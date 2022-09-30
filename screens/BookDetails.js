@@ -1,11 +1,15 @@
 import { View, Text, StyleSheet } from "react-native";
 
-function BookDetails({ synopsis, rating, pages }) {
+function BookDetails({ synopsis, rating, pages, style, textStyle }) {
   return (
-    <View style={styles.details}>
-      <Text style={styles.detailItem}>{synopsis}</Text>
-      <Text style={styles.detailItem}>{pages}</Text>
-      <Text style={styles.detailItem}>{rating}</Text>
+    <View style={[styles.details, style]}>
+      <Text style={[styles.detailItem, textStyle, styles.synopsis]}>
+        {synopsis}
+      </Text>
+      <Text style={[styles.detailItem, textStyle]}>{pages} sidor</Text>
+      <Text style={[styles.detailItem, textStyle]}>
+        Vårt betyg: {rating} / 10
+      </Text>
     </View>
   );
 }
@@ -14,7 +18,7 @@ export default BookDetails;
 
 const styles = StyleSheet.create({
   details: {
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     margin: 10,
@@ -23,5 +27,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginHorizontal: 4,
     fontSize: 20,
+  },
+  synopsis: {
+    color: "white",
+    fontSize: 15,
+    margin: 6,
   },
 });

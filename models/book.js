@@ -3,12 +3,13 @@ class Book {
     id,
     categoryIds,
     title,
+    author,
     type,
     rating,
     pages,
     imageUrl,
-    ingredients,
-    steps,
+    synopsis,
+
     isGlutenFree,
     isVegan,
     isVegetarian,
@@ -17,13 +18,13 @@ class Book {
     this.id = id;
     this.categoryIds = categoryIds;
     this.title = title;
+    this.author = author;
     this.type = type;
     this.rating = rating;
     this.pages = pages;
-
     this.imageUrl = imageUrl;
-    this.ingredients = ingredients;
-    this.steps = steps;
+    this.synopsis = synopsis;
+
     this.isGlutenFree = isGlutenFree;
     this.isVegan = isVegan;
     this.isVegetarian = isVegetarian;

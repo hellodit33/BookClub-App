@@ -19,7 +19,7 @@ import SuggestionInput from "./SuggestionInput";
 
 function DefaultScreen({ navigation }) {
   function pressHandler() {
-    navigation.navigate("Years");
+    navigation.navigate("Drawer");
   }
   const [suggestionsList, setSuggestionsList] = useState([]);
 
