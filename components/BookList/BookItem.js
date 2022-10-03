@@ -7,7 +7,7 @@ import {
   Platform,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import BookDetails from "../screens/BookDetails";
+import BookDetails from "../../screens/BookDetails";
 
 function BookItem({ id, title, imageUrl, rating, synopsis, pages }) {
   const navigation = useNavigation();

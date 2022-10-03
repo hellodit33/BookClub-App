@@ -27,6 +27,7 @@ import DefaultScreen from "./screens/DefaultScreen";
 import BookDetailsScreen from "./screens/BookDetailsScreen";
 import ToReadScreen from "./screens/ToReadScreen";
 import { Ionicons } from "@expo/vector-icons";
+import ToReadContextProvider from "./store/context/toread-context";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -71,35 +72,40 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "purple" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "purple" },
-          }}
-        >
-          <Stack.Screen
-            name="Default"
-            component={DefaultScreen}
-            options={{
-              title: "Bokklubben!",
+      <ToReadContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "purple" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "purple" },
             }}
-          />
-          <Stack.Screen
-            name="Drawer"
-            component={DrawerNavigator}
-            options={{
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen name="BooksOverview" component={BooksOverviewScreen} />
-          <Stack.Screen
-            name="BookDetailsScreen"
-            component={BookDetailsScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="Default"
+              component={DefaultScreen}
+              options={{
+                title: "Bokklubben!",
+              }}
+            />
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen
+              name="BooksOverview"
+              component={BooksOverviewScreen}
+            />
+            <Stack.Screen
+              name="BookDetailsScreen"
+              component={BookDetailsScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ToReadContextProvider>
     </>
   );
 }

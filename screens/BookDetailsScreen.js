@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import {
   Text,
   View,
@@ -10,14 +10,23 @@ import {
 import { BOOKS } from "../data/data";
 import BookDetails from "./BookDetails";
 import IconButton from "../components/IconButton";
+import { ToReadContext } from "../store/context/toread-context";
 
 function BookDetailsScreen({ route, navigation }) {
+  const toReadCtx = useContext(ToReadContext);
+
   const bookId = route.params.bookId;
 
   const selectedBook = BOOKS.find((book) => book.id === bookId);
 
+  const bookIsToRead = toReadCtx.ids.includes(bookId);
+
   function toRead() {
-    console.log("to read!");
+    if (bookIsToRead) {
+      toReadCtx.removeToRead(bookId);
+    } else {
+      toReadCtx.addToRead(bookId);
+    }
   }
 
   useLayoutEffect(() => {
@@ -30,13 +39,13 @@ function BookDetailsScreen({ route, navigation }) {
           <IconButton
             title="Att läsa"
             onPress={toRead}
-            icon="bookmark-outline"
+            icon={bookIsToRead ? "bookmark" : "bookmark-outline"}
             color="white"
           ></IconButton>
         );
       },
     });
-  }, [selectedBook, navigation]);
+  }, [selectedBook, navigation, toRead]);
   return (
     <ScrollView>
       <Image source={{ uri: selectedBook.imageUrl }} />
