@@ -1,9 +1,8 @@
-import { useState } from "react";
-
 import {
   StyleSheet,
   Text,
   View,
+  TextInput,
   FlatList,
   Button,
   ImageBackground,
@@ -16,15 +15,9 @@ import AppLoading from "expo-app-loading";
 
 import SuggestionItem from "./SuggestionItem";
 import SuggestionInput from "./SuggestionInput";
+import Colors from "../constants/colors";
 
-function DefaultScreen({ navigation }) {
-  function pressHandler() {
-    navigation.navigate("Drawer");
-  }
-  const [suggestionsList, setSuggestionsList] = useState([]);
-
-  const [modalIsVisible, setModalIsVisible] = useState(false);
-
+function DefaultScreen() {
   const [fontsLoaded] = useFonts({
     "open-sans": require("../assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
@@ -34,32 +27,12 @@ function DefaultScreen({ navigation }) {
     return <AppLoading />;
   }
 
-  function openModal() {
-    setModalIsVisible(true);
-  }
-  function closeModal() {
-    setModalIsVisible(false);
-  }
-  function addSuggestionHandler(enteredSuggestionText) {
-    setSuggestionsList((currentSuggestions) => [
-      ...currentSuggestions,
-      { text: enteredSuggestionText, id: Math.random().toString() },
-    ]);
-    closeModal();
-  }
-
-  function deleteSuggestionHandler(id) {
-    setSuggestionsList((currentSuggestions) => {
-      return currentSuggestions.filter((suggestion) => suggestion.id !== id);
-    });
-  }
-
   return (
     <>
       <StatusBar style="light" />
 
       <LinearGradient
-        colors={["lightgreen", "lightblue", "lightyellow"]}
+        colors={[Colors.saumon, Colors.middlebrown, Colors.lightbrown]}
         style={styles.appContainer}
       >
         <ImageBackground
@@ -68,49 +41,17 @@ function DefaultScreen({ navigation }) {
           imageStyle={styles.backgroundImage}
         >
           <View style={styles.firstScreen}>
-            <View style={styles.book}>
-              <Text style={styles.book}>
-                Månadens bok: Les particules élémentaires
-              </Text>
+            <View style={[styles.month, styles.book]}>
+              <Text>Månadens bok:</Text>
+              <TextInput>Decamerone</TextInput>
             </View>
-            <View>
+            {/*<View style={styles.button}>
               <Button
                 title="Se alla böcker vi läst"
+                color={Colors.lightgreen}
                 onPress={pressHandler}
               ></Button>
-            </View>
-            <View style={styles.suggestion}>
-              <Button
-                title="Lägg till ett förslag"
-                color="black"
-                onPress={openModal}
-              />
-
-              <SuggestionInput
-                onAddSuggestion={addSuggestionHandler}
-                visible={modalIsVisible}
-                closeModal={closeModal}
-              />
-
-              <View style={styles.list}>
-                <FlatList
-                  data={suggestionsList}
-                  alwaysBounceVertical={false}
-                  renderItem={(itemData) => {
-                    return (
-                      <SuggestionItem
-                        text={itemData.item.text}
-                        onDeleteItem={deleteSuggestionHandler}
-                        id={itemData.item.id}
-                      />
-                    );
-                  }}
-                  keyExtractor={(item, index) => {
-                    return item.id;
-                  }}
-                ></FlatList>
-              </View>
-            </View>
+            </View>*/}
           </View>
         </ImageBackground>
       </LinearGradient>
@@ -142,6 +83,11 @@ const styles = StyleSheet.create({
     textAlign: "center",
     maxWidth: "80%",
   },
+  month: {
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+  },
   book: {
     alignItems: "center",
     width: "80%",
@@ -159,5 +105,8 @@ const styles = StyleSheet.create({
   },
   appBackground: {
     flex: 1,
+  },
+  button: {
+    padding: 20,
   },
 });

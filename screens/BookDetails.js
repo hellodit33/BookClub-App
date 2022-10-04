@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     margin: 6,
   },
   average: {
-    color: Colors.darkgreen,
+    color: Colors.red,
     padding: 10,
   },
 });

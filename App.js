@@ -28,6 +28,9 @@ import BookDetailsScreen from "./screens/BookDetailsScreen";
 import ToReadScreen from "./screens/ToReadScreen";
 import ToReadContextProvider from "./store/context/toread-context";
 import Colors from "./constants/colors";
+import IconButton from "./components/IconButton";
+import Suggestions from "./screens/Suggestions";
+import User from "./screens/User";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -35,13 +38,23 @@ const BottomTabs = createBottomTabNavigator();
 function BottomNav() {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: Colors.beige },
-        headerTintColor: Colors.darkgreen,
-        tabBarStyle: { backgroundColor: Colors.beige },
-        tabBarActiveTintColor: Colors.darkgreen,
-        tabBarInactiveTintColor: Colors.saumon,
-      }}
+      screenOptions={({ navigation }) => ({
+        headerStyle: { backgroundColor: Colors.saumon },
+        headerTintColor: "white",
+        tabBarStyle: { backgroundColor: Colors.saumon },
+        tabBarActiveTintColor: Colors.red,
+        tabBarInactiveTintColor: Colors.middlebrown,
+        headerRight: () => (
+          <IconButton
+            icon="person"
+            size={20}
+            color={Colors.red}
+            onPress={() => {
+              navigation.navigate("User");
+            }}
+          />
+        ),
+      })}
     >
       <BottomTabs.Screen
         name="Default"
@@ -50,10 +63,21 @@ function BottomNav() {
           title: "Bokklubben",
           tabBarLabel: "Hem",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="hourglass" size={size} color={color} />
+            <Ionicons name="home" size={size} color={color} />
           ),
         }}
       />
+      <BottomTabs.Screen
+        name="Suggestions"
+        component={Suggestions}
+        options={{
+          title: "Bokförslag",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="person" size={size} color={color} />
+          ),
+        }}
+      ></BottomTabs.Screen>
+
       <BottomTabs.Screen
         name="Years"
         component={YearsScreen}
@@ -150,6 +174,7 @@ export default function App() {
               name="BookDetailsScreen"
               component={BookDetailsScreen}
             />
+            <Stack.Screen name="User" component={User} />
           </Stack.Navigator>
         </NavigationContainer>
       </ToReadContextProvider>

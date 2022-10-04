@@ -3,11 +3,11 @@ import Book from "../models/book";
 import Colors from "../constants/colors";
 
 export const YEARS = [
-  new Year("y1", "2018", Colors.lightgreen),
-  new Year("y2", "2019", Colors.lightgreen),
-  new Year("y3", "2020", Colors.lightgreen),
-  new Year("y4", "2021", Colors.lightgreen),
-  new Year("y5", "2022", Colors.lightgreen),
+  new Year("y1", "2018", Colors.beige),
+  new Year("y2", "2019", Colors.beige),
+  new Year("y3", "2020", Colors.beige),
+  new Year("y4", "2021", Colors.beige),
+  new Year("y5", "2022", Colors.beige),
 ];
 
 export const BOOKS = [
