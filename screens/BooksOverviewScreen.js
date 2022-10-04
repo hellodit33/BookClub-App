@@ -9,7 +9,7 @@ function BooksOverviewScreen({ route, navigation }) {
   const catId = route.params.categoryId;
 
   const displayedBooks = BOOKS.filter((bookItem) => {
-    return bookItem.categoryIds === catId;
+    return bookItem.years === catId;
   });
   useLayoutEffect(() => {
     const categoryYear = YEARS.find((category) => category.id === catId).year;

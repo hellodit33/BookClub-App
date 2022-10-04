@@ -1,11 +1,11 @@
 class Book {
   constructor(
     id,
-    categoryIds,
+    years,
     title,
     author,
     type,
-    rating,
+    ratings,
     pages,
     imageUrl,
     synopsis,
@@ -16,11 +16,11 @@ class Book {
     isLactoseFree
   ) {
     this.id = id;
-    this.categoryIds = categoryIds;
+    this.years = years;
     this.title = title;
     this.author = author;
     this.type = type;
-    this.rating = rating;
+    this.ratings = ratings;
     this.pages = pages;
     this.imageUrl = imageUrl;
     this.synopsis = synopsis;

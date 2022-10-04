@@ -8,8 +8,8 @@ function BooksList({ items }) {
       id: item.id,
       title: item.title,
       image: item.imageUrl,
-      type: item.type,
-      rating: item.rating,
+      pages: item.pages,
+      ratings: item.ratings,
     };
     return <BookItem {...bookItemProps} />;
   }

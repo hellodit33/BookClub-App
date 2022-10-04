@@ -1,14 +1,22 @@
 import { View, Text, StyleSheet } from "react-native";
+import RatingsOutput from "../components/Ratings/RatingsOutput";
+import Colors from "../constants/colors";
 
-function BookDetails({ synopsis, rating, pages, style, textStyle }) {
+function BookDetails({ synopsis, ratings, pages, style, textStyle }) {
+  const ratingsSum = ratings.reduce((sum, rating) => {
+    return sum + rating;
+  }, 0);
+
+  const ratingsAverage = Math.floor(ratingsSum / ratings.length);
+
   return (
     <View style={[styles.details, style]}>
       <Text style={[styles.detailItem, textStyle, styles.synopsis]}>
         {synopsis}
       </Text>
       <Text style={[styles.detailItem, textStyle]}>{pages} sidor</Text>
-      <Text style={[styles.detailItem, textStyle]}>
-        Vårt betyg: {rating} / 10
+      <Text style={[styles.detailItem, textStyle, styles.average]}>
+        Vårt betyg: {ratingsAverage} /10
       </Text>
     </View>
   );
@@ -32,5 +40,9 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 15,
     margin: 6,
+  },
+  average: {
+    color: Colors.darkgreen,
+    padding: 10,
   },
 });

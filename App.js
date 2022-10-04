@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import { Ionicons } from "@expo/vector-icons";
 import {
   StyleSheet,
   Text,
@@ -26,12 +26,58 @@ import BooksOverviewScreen from "./screens/BooksOverviewScreen";
 import DefaultScreen from "./screens/DefaultScreen";
 import BookDetailsScreen from "./screens/BookDetailsScreen";
 import ToReadScreen from "./screens/ToReadScreen";
-import { Ionicons } from "@expo/vector-icons";
 import ToReadContextProvider from "./store/context/toread-context";
+import Colors from "./constants/colors";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
-const BottomTab = createBottomTabNavigator();
+const BottomTabs = createBottomTabNavigator();
 
+function BottomNav() {
+  return (
+    <BottomTabs.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.beige },
+        headerTintColor: Colors.darkgreen,
+        tabBarStyle: { backgroundColor: Colors.beige },
+        tabBarActiveTintColor: Colors.darkgreen,
+        tabBarInactiveTintColor: Colors.saumon,
+      }}
+    >
+      <BottomTabs.Screen
+        name="Default"
+        component={DefaultScreen}
+        options={{
+          title: "Bokklubben",
+          tabBarLabel: "Hem",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="hourglass" size={size} color={color} />
+          ),
+        }}
+      />
+      <BottomTabs.Screen
+        name="Years"
+        component={YearsScreen}
+        options={{
+          title: "Historik",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="calendar" size={size} color={color} />
+          ),
+        }}
+      ></BottomTabs.Screen>
+
+      <BottomTabs.Screen
+        name="ToRead"
+        component={ToReadScreen}
+        options={{
+          title: "Att läsa",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="book" size={size} color={color} />
+          ),
+        }}
+      ></BottomTabs.Screen>
+    </BottomTabs.Navigator>
+  );
+}
 function DrawerNavigator() {
   return (
     <Drawer.Navigator
@@ -71,7 +117,7 @@ function DrawerNavigator() {
 export default function App() {
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar style="dark" />
       <ToReadContextProvider>
         <NavigationContainer>
           <Stack.Navigator
@@ -82,12 +128,13 @@ export default function App() {
             }}
           >
             <Stack.Screen
-              name="Default"
-              component={DefaultScreen}
+              name="BottomTabss"
+              component={BottomNav}
               options={{
-                title: "Bokklubben!",
+                headerShown: false,
               }}
             />
+
             <Stack.Screen
               name="Drawer"
               component={DrawerNavigator}

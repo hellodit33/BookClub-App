@@ -1,12 +1,13 @@
 import Year from "../models/year";
 import Book from "../models/book";
+import Colors from "../constants/colors";
 
 export const YEARS = [
-  new Year("y1", "2018", "pink"),
-  new Year("y2", "2019", "blue"),
-  new Year("y3", "2020", "green"),
-  new Year("y4", "2021", "red"),
-  new Year("y5", "2022", "yellow"),
+  new Year("y1", "2018", Colors.lightgreen),
+  new Year("y2", "2019", Colors.lightgreen),
+  new Year("y3", "2020", Colors.lightgreen),
+  new Year("y4", "2021", Colors.lightgreen),
+  new Year("y5", "2022", Colors.lightgreen),
 ];
 
 export const BOOKS = [
@@ -16,12 +17,12 @@ export const BOOKS = [
     "Marcelle",
     "Simone de Beauvoir",
     "short novel",
-    "5",
+    [1, 2, 3, 4, 5],
     "220",
+
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
     "Jag är inte som de andra, tänkte hon passionerat. Hon steg upp, öppnade jalusierna och gick ut på balkongen. Den lila himlen bredde ut sig över Paris som ett krokusfält och den underbara natten fick Marcelles hjärta att slå fortare. Hon tänkte på Madame de Staël, George Eliot och Anna de Noailles. Det var då hennes fantastiska öde plötsligt uppenbarade sig för henne. ”Jag ska dela livet med ett geni”, mumlade hon hänfört.",
-
     false,
     true,
     true,
@@ -32,8 +33,10 @@ export const BOOKS = [
     "y1",
     "Väggen",
     "Marlen Haushofer",
+
     "novel",
-    "5",
+    [1, 2, 3, 4, 5],
+
     "220",
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
@@ -51,7 +54,8 @@ export const BOOKS = [
     "Beckomberga: Ode till min familj",
     "Sara Stridsberg",
     "novel",
-    "5",
+    [1, 2, 3, 4, 5],
+
     "220",
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
@@ -69,7 +73,8 @@ export const BOOKS = [
     "Ru",
     "Kim Thuy",
     "novel",
-    "5",
+    [1, 2, 3, 4, 5],
+
     "220",
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
@@ -87,7 +92,8 @@ export const BOOKS = [
     "En saga om tidens väsen",
     "Ruth Ozeki",
     "novel",
-    "5",
+    [1, 2, 3, 4, 5],
+
     "220",
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
@@ -105,7 +111,8 @@ export const BOOKS = [
     "Snart är det 1968",
     "Åsa Moberg",
     "novel",
-    "5",
+    [1, 2, 3, 4, 5],
+
     "220",
     "https://cdn.pixabay.com/photo/2016/05/05/23/52/mountain-summit-1375015_960_720.jpg",
 
@@ -122,7 +129,8 @@ export const BOOKS = [
     "Harungen",
     "Ina Rosvall",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
 
@@ -139,7 +147,8 @@ export const BOOKS = [
     "Binas historia",
     "Maja Lunde",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     'Binas historia" är en roman om en av de slumrande katastrofer som alltmer kommer i blickfånget: bidöden. Krisen med bisamhällen som slås ut världen över kan se ut som en perifer detalj i det ekologiska systemet. Men utan bin, ingen pollinering. Utan pollinering, inga växter. Och vad är förutsättningarna för liv utan växter? William är en melankolisk biolog och fröhandlare i England 1852, som bygger en helt ny sorts bikupor för att ge ära och berömmelse åt sig själv och familjen. George är biodlare i USA 2007 och kämpar för sin överlevnad men hoppas att sonen kan rädda gården. Men något håller på att hända med hans bin. Tao arbetar med handpollinering i ett framtida Kina där bina har försvunnit. Hennes högsta önskan är att sonen ska få ett bättre liv. Från de första trevande försöken att odla bin över det industriella lantbruket till en framtid utan bin. "Binas historia" är tre vackert och överraskande sammanfogade berättelser om relationer mellan föräldrar och barn, och om människans sårbarhet. Maja Lunde har skrivit manus för film och tv, och givit ut flera böcker för barn och ungdom, bland annat serien "Världens bästa gäng", som i höst ges ut på Natur & Kultur. "Binas historia" är hennes första roman för vuxna och har sålts till femton länder. Maja Lunde är bosatt i Oslo, Norge.',
@@ -155,7 +164,8 @@ export const BOOKS = [
     "Scum Manifesto",
     "Valerie Solanas",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     "SCUM Manifesto was considered one of the most outrageous, violent and certifiably crazy tracts when it first appeared in 1968. Valerie Solanas, the woman who shot Andy Warhol, self-published this work just before her rampage against the king of Pop Art made her a household name and resulted in her confinement to a mental institution. But the Manifesto, for all its vitriol, is impossible to dismiss as just the rantings of a lesbian lunatic. In fact, the work has indisputable prescience, not only as a radical feminist analysis light-years ahead of its timepredicting artificial insemination, ATMs, a feminist uprising against under-representation in the artsbut also as a stunning testament to the rage of an abused and destitute woman. The focus of this edition is not on the nostalgic appeal of the work, but on Avital Ronell’s incisive introduction, “Deviant Payback: The Aims of Valerie Solanas.” Here is a reconsideration of Solanas’s infamous text in light of her social milieu, Derrida’s “The Ends of Man” (written in the same year), Judith Butler’s Excitable Speech, Nietzsche’s Ubermensch and notorious feminist icons from Medusa, Medea and Antigone, to Lizzie Borden, Lorenna Bobbit and Aileen Wournos, illuminating the evocative exuberance of Solanas’s dark tract.",
@@ -171,7 +181,8 @@ export const BOOKS = [
     "I vilt tillstånd",
     "Roxane Gay",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     "Mireille Jameson, dotter till en välbärgad familj i Haiti och numer boende i USA, kidnappas i Port-au-Prince mot en lösesumma på 1 miljon dollar. I 13 dagar hålls hon fången medan hennes far vägrar betala och hennes man kämpar för att få henne fri. När hon äntligen släpps börjar hennes mödosamma kamp för att återvända till sitt liv. I vilt tillstånd är både ett familjedrama, en utmanande politisk roman och en stark roman om kärlek.",
@@ -188,7 +199,8 @@ export const BOOKS = [
     "Virginia Woolf",
 
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     "Virginia Woolf's Orlando 'The longest and most charming love letter in literature', playfully constructs the figure of Orlando as the fictional embodiment of Woolf's close friend and lover, Vita Sackville-West. Spanning three centuries, the novel opens as Orlando, a young nobleman in Elizabeth's England, awaits a visit from the Queen and traces his experience with first love as England under James I lies locked in the embrace of the Great Frost. At the midpoint of the novel, Orlando, now an ambassador in Constantinople, awakes to find that he is now a woman, and the novel indulges in farce and irony to consider the roles of women in the 18th and 19th centuries. As the novel ends in 1928, a year consonant with full suffrage for women. Orlando, now a wife and mother, stands poised at the brink of a future that holds new hope and promise for women.",
@@ -204,7 +216,8 @@ export const BOOKS = [
     "Norwegian Wood",
     "Haruki Murakami",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     "Toru, a quiet and preternaturally serious young college student in Tokyo, is devoted to Naoko, a beautiful and introspective young woman, but their mutual passion is marked by the tragic death of their best friend years before. Toru begins to adapt to campus life and the loneliness and isolation he faces there, but Naoko finds the pressures and responsibilities of life unbearable. As she retreats further into her own world, Toru finds himself reaching out to others and drawn to a fiercely independent and sexually liberated young woman. A magnificent blending of the music, the mood, and the ethos that was the sixties with the story of one college student's romantic coming of age, Norwegian Wood brilliantly recaptures a young man's first, hopeless, and heroic love.",
@@ -220,7 +233,8 @@ export const BOOKS = [
     "En debutants dagbok",
     "Wera von Essen",
     "novel",
-    "8",
+    [1, 2, 3, 4, 5],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     '"Helgen sade mig följande: att jag måste bli helt besatt. Jag måste kapa allt. Jag måste ta mitt eget drama på allra största allvar. Ingenting får vara viktigare än mitt eget drama. Efter att jag hade svimmat i Traneberg ringde Stig och frågade vad blodfullmåne betyder. Han har förstått vad jag är för något. Vi var tysta en lång stund i telefonen. Östermalmarnas ansikten tycktes grimasera i dag, elegant och avmätt. Mitt självtvivel är för starkt. Det trycker på, hårt hårt, kräver att bli övervunnet. Det fungerar inte längre, jag måste börja skriva dagbok igen. Annars kommer jag att, som man säger, »tappa det«."',
@@ -237,7 +251,8 @@ export const BOOKS = [
     "How to be both",
     "Ali Smith",
     "novel",
-    "8",
+    [1, 3, 4, 5, 6, 8],
+
     "220",
     "http://zone-critique.com/wp-content/uploads/2014/03/9782021117707.jpg",
     "Passionate, compassionate, vitally inventive and scrupulously playful, Ali Smith’s novels are like nothing else. A true original, she is a one-of-a-kind literary sensation. Her novels consistently attract serious acclaim and discussion—and have won her a dedicated readership who are drawn again and again to the warmth, humanity and humor of her voice. How to be both is a novel all about art’s versatility. Borrowing from painting’s fresco technique to make an original literary double-take, it’s a fast-moving genre-bending conversation between forms, times, truths and fictions. There’s a Renaissance artist of the 1460s. There’s the child of a child of the 1960s. Two tales of love and injustice twist into a singular yarn where time gets timeless, structural gets playful, knowing gets mysterious, fictional gets real—and all life’s givens get given a second chance.",

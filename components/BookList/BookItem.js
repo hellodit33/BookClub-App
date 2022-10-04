@@ -9,7 +9,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import BookDetails from "../../screens/BookDetails";
 
-function BookItem({ id, title, imageUrl, rating, synopsis, pages }) {
+function BookItem({ id, title, imageUrl, ratings, synopsis, pages }) {
   const navigation = useNavigation();
 
   function selectBookItemHandler() {
@@ -30,7 +30,7 @@ function BookItem({ id, title, imageUrl, rating, synopsis, pages }) {
             <Image source={{ uri: imageUrl }} style={styles.image}></Image>
             <Text style={styles.title}>{title}</Text>
           </View>
-          <BookDetails synopsis={synopsis} pages={pages} rating={rating} />
+          <BookDetails synopsis={synopsis} pages={pages} ratings={ratings} />
         </View>
       </Pressable>
     </View>

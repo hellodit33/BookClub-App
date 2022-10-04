@@ -52,7 +52,7 @@ function BookDetailsScreen({ route, navigation }) {
 
       <View>
         <BookDetails
-          rating={selectedBook.rating}
+          ratings={selectedBook.ratings}
           pages={selectedBook.pages}
           synopsis={selectedBook.synopsis}
           textStyle={styles.textStyle}
