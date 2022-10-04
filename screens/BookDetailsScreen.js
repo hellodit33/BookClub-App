@@ -11,6 +11,7 @@ import { BOOKS } from "../data/data";
 import BookDetails from "./BookDetails";
 import IconButton from "../components/IconButton";
 import { ToReadContext } from "../store/context/toread-context";
+import { useNavigation } from "react";
 
 function BookDetailsScreen({ route, navigation }) {
   const toReadCtx = useContext(ToReadContext);
@@ -20,6 +21,10 @@ function BookDetailsScreen({ route, navigation }) {
   const selectedBook = BOOKS.find((book) => book.id === bookId);
 
   const bookIsToRead = toReadCtx.ids.includes(bookId);
+
+  function rateItemHandler() {
+    navigation.navigate("RateItem", { bookId: bookId });
+  }
 
   function toRead() {
     if (bookIsToRead) {
@@ -57,6 +62,7 @@ function BookDetailsScreen({ route, navigation }) {
           synopsis={selectedBook.synopsis}
           textStyle={styles.textStyle}
         />
+        <Button onPress={rateItemHandler} title="Ge ett betyg"></Button>
       </View>
     </ScrollView>
   );

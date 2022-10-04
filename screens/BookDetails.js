@@ -1,4 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import RatingsOutput from "../components/Ratings/RatingsOutput";
 import Colors from "../constants/colors";
 

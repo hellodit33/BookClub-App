@@ -31,6 +31,7 @@ import Colors from "./constants/colors";
 import IconButton from "./components/IconButton";
 import Suggestions from "./screens/Suggestions";
 import User from "./screens/User";
+import RateItem from "./screens/RateItem";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -146,9 +147,9 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
-              headerStyle: { backgroundColor: "purple" },
+              headerStyle: { backgroundColor: Colors.saumon },
               headerTintColor: "white",
-              contentStyle: { backgroundColor: "purple" },
+              contentStyle: { backgroundColor: Colors.beige },
             }}
           >
             <Stack.Screen
@@ -174,7 +175,16 @@ export default function App() {
               name="BookDetailsScreen"
               component={BookDetailsScreen}
             />
-            <Stack.Screen name="User" component={User} />
+            <Stack.Screen
+              name="User"
+              component={User}
+              options={{ presentation: "modal", title: "Min profil" }}
+            />
+            <Stack.Screen
+              name="RateItem"
+              component={RateItem}
+              options={{ presentation: "modal", title: "Ge ett betyg" }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </ToReadContextProvider>

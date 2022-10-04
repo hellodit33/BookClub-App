@@ -1,14 +1,16 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
+import IconButton from "../components/IconButton";
+import Colors from "../constants/colors";
 function SuggestionItem(props) {
   return (
     <View style={styles.suggestionItem}>
-      <Pressable
+      <Text style={styles.suggestionText}>{props.text}</Text>
+      <IconButton
         onPress={props.onDeleteItem.bind(this, props.id)}
         android_ripple={{ color: "black" }}
-        style={({ pressed }) => pressed && styles.pressedItem}
-      >
-        <Text style={styles.suggestionText}>{props.text}</Text>
-      </Pressable>
+        icon="trash"
+        size={36}
+      />
     </View>
   );
 }
@@ -20,8 +22,10 @@ const styles = StyleSheet.create({
     margin: 8,
     padding: 8,
     borderRadius: 6,
-    backgroundColor: "purple",
+    backgroundColor: Colors.lightgreen,
     color: "black",
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   suggestionText: {
     color: "white",
