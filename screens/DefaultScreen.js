@@ -44,6 +44,7 @@ function DefaultScreen() {
             <View style={[styles.month, styles.book]}>
               <Text>Månadens bok:</Text>
               <TextInput>Decamerone</TextInput>
+              <TextInput keyboardType="default">13/11/2022</TextInput>
             </View>
             {/*<View style={styles.button}>
               <Button

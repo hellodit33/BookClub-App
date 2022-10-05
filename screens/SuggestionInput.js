@@ -11,11 +11,11 @@ import {
 import {} from "@expo/vector-icons";
 
 import PrimaryButton from "../components/PrimaryButton";
+import Button from "../UI/Button";
+import { storeSuggestions } from "../util/http";
 
 function SuggestionInput(props) {
   const [enteredSuggestionText, setEnteredSuggestionText] = useState("");
-  const [enteredPages, setEnteredPages] = useState("");
-
   function suggestionInputHandler(enteredText) {
     setEnteredSuggestionText(enteredText);
   }
@@ -23,15 +23,12 @@ function SuggestionInput(props) {
     if (enteredSuggestionText.length > 0) {
       props.onAddSuggestion(enteredSuggestionText);
       setEnteredSuggestionText("");
+      storeSuggestions(props);
     } else {
       Alert.alert("Oops!", "Du glömde titeln på boken.", [
         { text: "Okej", style: "default" },
       ]);
     }
-  }
-
-  function pagesInputHandler(enteredPages) {
-    setEnteredPages(enteredPages);
   }
 
   return (
@@ -54,6 +51,14 @@ function SuggestionInput(props) {
             placeholder="Varför ska vi läsa den?"
             style={styles.suggestionMotivation}
             keyboardType="default"
+            multiline={true}
+          ></TextInput>
+
+          <TextInput
+            placeholder="Synopsis"
+            style={styles.suggestionSynopsis}
+            keyboardType="default"
+            multiline={true}
           ></TextInput>
           <TextInput
             placeholder="Antalet sidor"
@@ -62,13 +67,6 @@ function SuggestionInput(props) {
             style={styles.suggestionPages}
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={pagesInputHandler}
-            value={enteredPages}
-          ></TextInput>
-          <TextInput
-            placeholder="Synopsis"
-            style={styles.suggestionSynopsis}
-            keyboardType="default"
           ></TextInput>
           <View style={styles.buttonsContainer}>
             <View style={styles.button}>
@@ -144,6 +142,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 8,
     borderRadius: 20,
+    minHeight: 100,
+    textAlignVertical: "top",
   },
   suggestionSynopsis: {
     borderWidth: 1,
@@ -158,6 +158,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginVertical: 8,
     borderRadius: 20,
+    minHeight: 100,
+    textAlignVertical: "top",
   },
   buttonsContainer: {
     flexDirection: "row",

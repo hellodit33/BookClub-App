@@ -4,6 +4,7 @@ import Colors from "../constants/colors";
 import { View, Button, FlatList, Dimensions, StyleSheet } from "react-native";
 import SuggestionInput from "./SuggestionInput";
 import SuggestionItem from "./SuggestionItem";
+import { storeSuggestions } from "../util/http";
 
 function Suggestions() {
   const [suggestionsList, setSuggestionsList] = useState([]);
@@ -18,8 +19,12 @@ function Suggestions() {
   function addSuggestionHandler(enteredSuggestionText) {
     setSuggestionsList((currentSuggestions) => [
       ...currentSuggestions,
-      { text: enteredSuggestionText, id: Math.random().toString() },
+      {
+        text: enteredSuggestionText,
+        id: Math.random().toString(),
+      },
     ]);
+
     closeModal();
   }
 
