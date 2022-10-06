@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -12,7 +12,6 @@ import {
   Button,
   ImageBackground,
   Dimensions,
-  Linking,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
@@ -32,11 +31,32 @@ import IconButton from "./components/IconButton";
 import Suggestions from "./screens/Suggestions";
 import User from "./screens/User";
 import RateItem from "./screens/RateItem";
+import LoginScreen from "./screens/LoginScreen";
+import SignupScreen from "./screens/SignupScreen";
+import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTabs = createBottomTabNavigator();
 
+function AuthStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.lightgreen },
+        headerTintColor: "white",
+        contentStyle: { backgroundColor: Colors.darkgreen },
+      }}
+    >
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Signup" component={SignupScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function BottomNav() {
+  const authCtx = useContext(AuthContext);
+
   return (
     <BottomTabs.Navigator
       screenOptions={({ navigation }) => ({
@@ -46,14 +66,23 @@ function BottomNav() {
         tabBarActiveTintColor: Colors.red,
         tabBarInactiveTintColor: Colors.middlebrown,
         headerRight: () => (
-          <IconButton
-            icon="person"
-            size={20}
-            color={Colors.red}
-            onPress={() => {
-              navigation.navigate("User");
-            }}
-          />
+          <View style={styles.headerRight}>
+            <IconButton
+              icon="person"
+              size={20}
+              color={Colors.red}
+              onPress={() => {
+                navigation.navigate("User");
+              }}
+            />
+
+            <IconButton
+              icon="log-out"
+              size={20}
+              color={Colors.red}
+              onPress={authCtx.logout}
+            />
+          </View>
         ),
       })}
     >
@@ -74,7 +103,7 @@ function BottomNav() {
         options={{
           title: "Bokförslag",
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person" size={size} color={color} />
+            <Ionicons name="book-outline" size={size} color={color} />
           ),
         }}
       ></BottomTabs.Screen>
@@ -139,55 +168,93 @@ function DrawerNavigator() {
     </Drawer.Navigator>
   );
 }
+
+function AuthenticatedStack() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: Colors.saumon },
+        headerTintColor: "white",
+        contentStyle: { backgroundColor: Colors.beige },
+      }}
+    >
+      <Stack.Screen
+        name="BottomTabss"
+        component={BottomNav}
+        options={{
+          headerShown: false,
+        }}
+      />
+
+      <Stack.Screen
+        name="Drawer"
+        component={DrawerNavigator}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen name="BooksOverview" component={BooksOverviewScreen} />
+      <Stack.Screen name="BookDetailsScreen" component={BookDetailsScreen} />
+      <Stack.Screen
+        name="User"
+        component={User}
+        options={{ presentation: "modal", title: "Min profil" }}
+      />
+      <Stack.Screen
+        name="RateItem"
+        component={RateItem}
+        options={{ presentation: "modal", title: "Ge ett betyg" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function Navigation() {
+  const authCtx = useContext(AuthContext);
+  return (
+    <ToReadContextProvider>
+      <NavigationContainer>
+        {!authCtx.isAuthenticated && <AuthStack />}
+        {authCtx.isAuthenticated && <AuthenticatedStack />}
+      </NavigationContainer>
+    </ToReadContextProvider>
+  );
+}
+
+function Root() {
+  const [isTryingLogin, setIsTryingLogin] = useState(true);
+  const authCtx = useContext(AuthContext);
+  useEffect(() => {
+    async function fetchToken() {
+      const storedToken = await AsyncStorage.getItem("token");
+      if (storedToken) {
+        authCtx.authenticate(storedToken);
+      }
+      setIsTryingLogin(false);
+    }
+
+    fetchToken();
+  }, []);
+
+  if (isTryingLogin) {
+    return <AppLoading />;
+  }
+  return <Navigation />;
+}
 export default function App() {
   return (
     <>
       <StatusBar style="dark" />
-      <ToReadContextProvider>
-        <NavigationContainer>
-          <Stack.Navigator
-            screenOptions={{
-              headerStyle: { backgroundColor: Colors.saumon },
-              headerTintColor: "white",
-              contentStyle: { backgroundColor: Colors.beige },
-            }}
-          >
-            <Stack.Screen
-              name="BottomTabss"
-              component={BottomNav}
-              options={{
-                headerShown: false,
-              }}
-            />
-
-            <Stack.Screen
-              name="Drawer"
-              component={DrawerNavigator}
-              options={{
-                headerShown: false,
-              }}
-            />
-            <Stack.Screen
-              name="BooksOverview"
-              component={BooksOverviewScreen}
-            />
-            <Stack.Screen
-              name="BookDetailsScreen"
-              component={BookDetailsScreen}
-            />
-            <Stack.Screen
-              name="User"
-              component={User}
-              options={{ presentation: "modal", title: "Min profil" }}
-            />
-            <Stack.Screen
-              name="RateItem"
-              component={RateItem}
-              options={{ presentation: "modal", title: "Ge ett betyg" }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </ToReadContextProvider>
+      <AuthContextProvider>
+        <Root />
+      </AuthContextProvider>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  headerRight: {
+    flexDirection: "row",
+    paddingRight: 5,
+  },
+});

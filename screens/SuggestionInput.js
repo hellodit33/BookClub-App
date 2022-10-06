@@ -65,7 +65,6 @@ function SuggestionInput(props) {
             keyboardType="number-pad"
             maxLength={4}
             style={styles.suggestionPages}
-            autoCapitalize="none"
             autoCorrect={false}
           ></TextInput>
           <View style={styles.buttonsContainer}>

@@ -9,6 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
+import axios from "axios";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import AppLoading from "expo-app-loading";
@@ -16,8 +17,27 @@ import AppLoading from "expo-app-loading";
 import SuggestionItem from "./SuggestionItem";
 import SuggestionInput from "./SuggestionInput";
 import Colors from "../constants/colors";
+import { useContext, useEffect, useState } from "react";
+import AuthContent from "../components/Auth/AuthContent";
+import { AuthContext } from "../store/context/auth-context";
 
 function DefaultScreen() {
+  const [fetchedMessage, setFetchedMessage] = useState("");
+
+  const authCtx = useContext(AuthContext);
+
+  const token = authCtx.token;
+  useEffect(() => {
+    axios
+      .get(
+        "https://bookclub-course-default-rtdb.firebaseio.com//message.json?auth=" +
+          token
+      )
+      .then((response) => {
+        setFetchedMessage(response.data);
+      }),
+      [];
+  });
   const [fontsLoaded] = useFonts({
     "open-sans": require("../assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("../assets/fonts/OpenSans-Bold.ttf"),
@@ -42,6 +62,7 @@ function DefaultScreen() {
         >
           <View style={styles.firstScreen}>
             <View style={[styles.month, styles.book]}>
+              <Text>{fetchedMessage}</Text>
               <Text>Månadens bok:</Text>
               <TextInput>Decamerone</TextInput>
               <TextInput keyboardType="default">13/11/2022</TextInput>
