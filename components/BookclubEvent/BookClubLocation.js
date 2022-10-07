@@ -7,7 +7,7 @@ import {
   PermissionStatus,
 } from "expo-location";
 import { useEffect, useState } from "react";
-import { getMapPreview } from "../../util/location";
+import { getAddress, getMapPreview } from "../../util/location";
 import {
   useIsFocused,
   useNavigation,
@@ -35,10 +35,6 @@ function BookClubLocation({ onPickLocation }) {
     }
   }, [route, isFocused]);
 
-  useEffect(() => {
-    onPickLocation(pickedLocation);
-  }, [pickedLocation, onPickLocation]);
-
   async function verifyPermissions() {
     if (
       locationPermissionsInformation.status === PermissionStatus.UNDETERMINED
@@ -57,7 +53,7 @@ function BookClubLocation({ onPickLocation }) {
     return true;
   }
 
-  async function geoLocationHandler() {
+  async function getLocationHandler() {
     const hasPermission = await verifyPermissions();
 
     if (!hasPermission) {
@@ -69,7 +65,8 @@ function BookClubLocation({ onPickLocation }) {
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
-    console.log(location);
+    const address = await getAddress(pickedLocation.lat, pickedLocation.lng);
+    onPickLocation({ ...pickedLocation, address: address });
   }
 
   function pickOnMapHandler() {
@@ -94,7 +91,7 @@ function BookClubLocation({ onPickLocation }) {
       <View style={styles.mapPreview}>{locationPreview}</View>
 
       <View style={styles.actions}>
-        <OutlinedButton icon="location" onPress={geoLocationHandler}>
+        <OutlinedButton icon="location" onPress={getLocationHandler}>
           Ändra plats till bokklubben
         </OutlinedButton>
         <OutlinedButton onPress={pickOnMapHandler} icon="map">
