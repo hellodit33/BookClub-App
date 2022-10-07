@@ -35,6 +35,9 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import AuthContextProvider, { AuthContext } from "./store/context/auth-context";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AddQuote from "./screens/AddQuote";
+import AllQuotes from "./screens/AllQuotes";
+import Map from "./screens/Map";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -87,7 +90,7 @@ function BottomNav() {
       })}
     >
       <BottomTabs.Screen
-        name="Default"
+        name="DefaultScreen"
         component={DefaultScreen}
         options={{
           title: "Bokklubben",
@@ -204,6 +207,21 @@ function AuthenticatedStack() {
         name="RateItem"
         component={RateItem}
         options={{ presentation: "modal", title: "Ge ett betyg" }}
+      />
+      <Stack.Screen
+        name="AddQuote"
+        component={AddQuote}
+        options={{ title: "Lägg till ett foto på ett citat" }}
+      />
+      <Stack.Screen
+        name="AllQuotes"
+        component={AllQuotes}
+        options={{ title: "Se alla citat" }}
+      />
+      <Stack.Screen
+        name="Map"
+        component={Map}
+        options={{ title: "Bokklubbens plats" }}
       />
     </Stack.Navigator>
   );

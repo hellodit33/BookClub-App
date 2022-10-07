@@ -26,6 +26,13 @@ function BookDetailsScreen({ route, navigation }) {
     navigation.navigate("RateItem", { bookId: bookId });
   }
 
+  function allQuotesHandler() {
+    navigation.navigate("AllQuotes", { bookId: bookId });
+  }
+  function addQuoteHandler() {
+    navigation.navigate("AddQuote", { bookId: bookId });
+  }
+
   function toRead() {
     if (bookIsToRead) {
       toReadCtx.removeToRead(bookId);
@@ -63,6 +70,8 @@ function BookDetailsScreen({ route, navigation }) {
           textStyle={styles.textStyle}
         />
         <Button onPress={rateItemHandler} title="Ge ett betyg"></Button>
+        <Button onPress={addQuoteHandler} title="Lägg till ett citat"></Button>
+        <Button onPress={allQuotesHandler} title="Se alla citat"></Button>
       </View>
     </ScrollView>
   );

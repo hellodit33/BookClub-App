@@ -1,0 +1,4 @@
+export const GOOGLE_API_KEY = "AIzaSyD1WSFBqmIeGWQ8XBs2xzXW_-LjB279a2Q";
+
+export const GOOGLE_GEOCODING_API_KEY =
+  "AIzaSyCt_Rf-KT_EdRWHVgUNPM9OlbjQp5gFhkU";
