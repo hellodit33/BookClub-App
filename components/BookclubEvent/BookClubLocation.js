@@ -35,6 +35,10 @@ function BookClubLocation({ onPickLocation }) {
     }
   }, [route, isFocused]);
 
+  useEffect(() => {
+    onPickLocation(pickedLocation);
+  }, [pickedLocation, onPickLocation]);
+
   async function verifyPermissions() {
     if (
       locationPermissionsInformation.status === PermissionStatus.UNDETERMINED
@@ -52,8 +56,7 @@ function BookClubLocation({ onPickLocation }) {
     }
     return true;
   }
-
-  async function getLocationHandler() {
+  async function geoLocationHandler() {
     const hasPermission = await verifyPermissions();
 
     if (!hasPermission) {
@@ -65,10 +68,8 @@ function BookClubLocation({ onPickLocation }) {
       lat: location.coords.latitude,
       lng: location.coords.longitude,
     });
-    const address = await getAddress(pickedLocation.lat, pickedLocation.lng);
-    onPickLocation({ ...pickedLocation, address: address });
+    console.log(location);
   }
-
   function pickOnMapHandler() {
     navigation.navigate("Map");
   }
@@ -91,7 +92,7 @@ function BookClubLocation({ onPickLocation }) {
       <View style={styles.mapPreview}>{locationPreview}</View>
 
       <View style={styles.actions}>
-        <OutlinedButton icon="location" onPress={getLocationHandler}>
+        <OutlinedButton icon="location" onPress={geoLocationHandler}>
           Ändra plats till bokklubben
         </OutlinedButton>
         <OutlinedButton onPress={pickOnMapHandler} icon="map">

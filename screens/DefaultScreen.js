@@ -20,13 +20,11 @@ import Colors from "../constants/colors";
 import { useContext, useEffect, useState } from "react";
 import AuthContent from "../components/Auth/AuthContent";
 import { AuthContext } from "../store/context/auth-context";
-import LocationPicker from "../components/BookclubEvent/BookClubLocation";
-import BookClubLocation from "../components/BookclubEvent/BookClubLocation";
-import FlatButton from "../UI/FlatButton";
+
+import BookClubEvent from "../components/BookclubEvent/BookclubEvent";
 
 function DefaultScreen() {
   const [fetchedMessage, setFetchedMessage] = useState("");
-  const [pickedLocation, setPickedLocation] = useState();
 
   const authCtx = useContext(AuthContext);
 
@@ -51,14 +49,6 @@ function DefaultScreen() {
     return <AppLoading />;
   }
 
-  function pickLocationHandler(location) {
-    setPickedLocation(location);
-  }
-
-  function saveBookclub() {
-    console.log(pickedLocation);
-  }
-
   return (
     <>
       <StatusBar style="light" />
@@ -76,18 +66,7 @@ function DefaultScreen() {
             <View style={[styles.month, styles.book]}>
               <Text>{fetchedMessage}</Text>
               <Text>Månadens bok:</Text>
-              <TextInput>Decamerone</TextInput>
-              <TextInput keyboardType="default">13/11/2022</TextInput>
-              <View>
-                <BookClubLocation onPickLocation={pickLocationHandler} />
-                <FlatButton
-                  color={Colors.brown}
-                  size={24}
-                  onPress={saveBookclub}
-                >
-                  Spara
-                </FlatButton>
-              </View>
+              <BookClubEvent onCreateEvent />
             </View>
           </View>
         </ImageBackground>

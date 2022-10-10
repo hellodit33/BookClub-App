@@ -1,4 +1,4 @@
-class Quote {
+export class Quote {
   constructor(title, imageUri, book, page) {
     this.title = title;
     this.imageUri = imageUri;
@@ -7,5 +7,3 @@ class Quote {
     this.id = new Date().toString() + Math.random().toString();
   }
 }
-
-export default Quote;

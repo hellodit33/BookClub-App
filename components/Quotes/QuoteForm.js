@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Text, View, ScrollView, TextInput } from "react-native";
+import { Quote } from "../../models/quote";
 import FlatButton from "../../UI/FlatButton";
 import LocationPicker from "../BookclubEvent/BookClubLocation";
 import ImagePicker from "./ImagePicker";
 
-function QuoteForm({ bookToRate }) {
+function QuoteForm({ onCreateQuote, bookToRate }) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [selectedPic, setSelectedPic] = useState();
 
@@ -17,8 +18,8 @@ function QuoteForm({ bookToRate }) {
   }
 
   function saveQuote() {
-    console.log(enteredTitle);
-    console.log(selectedPic);
+    const quoteData = new Quote(enteredTitle, selectedPic);
+    onCreateQuote();
   }
   return (
     <ScrollView>
