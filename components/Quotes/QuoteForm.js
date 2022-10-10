@@ -6,11 +6,11 @@ import LocationPicker from "../BookclubEvent/BookClubLocation";
 import ImagePicker from "./ImagePicker";
 
 function QuoteForm({ onCreateQuote, bookToRate }) {
-  const [enteredTitle, setEnteredTitle] = useState("");
+  const [bookPage, setEnteredBookPage] = useState("");
   const [selectedPic, setSelectedPic] = useState();
 
-  function changeTitleHandler(enteredText) {
-    setEnteredTitle(enteredText);
+  function changePageHandler(enteredText) {
+    setEnteredBookPage(enteredText);
   }
 
   function takePicHandler(imageUri) {
@@ -18,17 +18,15 @@ function QuoteForm({ onCreateQuote, bookToRate }) {
   }
 
   function saveQuote() {
-    const quoteData = new Quote(enteredTitle, selectedPic);
-    onCreateQuote();
+    const quoteData = new Quote(bookToRate, bookPage, selectedPic);
+    console.log(quoteData);
+
+    onCreateQuote(quoteData);
   }
   return (
     <ScrollView>
-      <Text>Title</Text>
-      <TextInput
-        onChangeText={changeTitleHandler}
-        value={enteredTitle}
-      ></TextInput>
-      <Text>{bookToRate}</Text>
+      <Text>Sidan:</Text>
+      <TextInput onChangeText={changePageHandler} value={bookPage}></TextInput>
       <ImagePicker onTakePic={takePicHandler} />
       <FlatButton onPress={saveQuote}>Spara citatet</FlatButton>
     </ScrollView>

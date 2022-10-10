@@ -1,9 +1,9 @@
 export class Quote {
-  constructor(title, imageUri, book, page) {
-    this.title = title;
-    this.imageUri = imageUri;
+  constructor(book, page, imageUri) {
     this.book = book;
     this.page = page;
+    this.imageUri = imageUri;
+
     this.id = new Date().toString() + Math.random().toString();
   }
 }

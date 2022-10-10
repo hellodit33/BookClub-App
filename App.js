@@ -38,6 +38,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AddQuote from "./screens/AddQuote";
 import AllQuotes from "./screens/AllQuotes";
 import Map from "./screens/Map";
+import QuoteDetails from "./screens/QuoteDetails";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const BottomTabs = createBottomTabNavigator();
@@ -216,12 +217,27 @@ function AuthenticatedStack() {
       <Stack.Screen
         name="AllQuotes"
         component={AllQuotes}
-        options={{ title: "Se alla citat" }}
+        options={({ navigation }) => ({
+          title: "Se alla citat",
+          headerRight: () => (
+            <IconButton
+              icon="add"
+              size={24}
+              color={"white"}
+              onPress={() => navigation.navigate("AddQuote")}
+            />
+          ),
+        })}
       />
       <Stack.Screen
         name="Map"
         component={Map}
         options={{ title: "Bokklubbens plats" }}
+      />
+      <Stack.Screen
+        name="QuoteDetails"
+        component={QuoteDetails}
+        options={{ title: "Citatet" }}
       />
     </Stack.Navigator>
   );
